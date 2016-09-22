@@ -2,6 +2,7 @@ package iii.org.tw.server_background;
 
 import android.app.Service;
 import android.content.Intent;
+import android.location.LocationListener;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class MyService extends Service {
         super.onCreate();
 
         timer = new Timer();
+        timer.schedule(new BadTask(),0,1000);
 
         mp = MediaPlayer.create(this,R.raw.littlt_lucky);
 
@@ -38,6 +40,13 @@ public class MyService extends Service {
         it.putExtra("len",mp.getDuration());
         sendBroadcast(it);
 
+    }
+
+    private class BadTask extends TimerTask {
+        @Override
+        public void run() {
+            Log.d("Abner","OKOK");
+        }
     }
 
     private class MyTask extends TimerTask {
