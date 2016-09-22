@@ -21,6 +21,7 @@
         android:text="test3"
         android:onClick="test3"/>
     <SeekBar
+        android:id="@+id/seekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
