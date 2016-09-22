@@ -25,6 +25,12 @@ public class MyService extends Service {
 
         mp = MediaPlayer.create(this,R.raw.littlt_lucky);
 
+        Log.d("Abner","len" + mp.getDuration());
+
+        Intent it = new Intent("Abnermp3");
+        it.putExtra("Abner",mp.getDuration());
+        sendBroadcast(it);
+
     }
 
     @Override
