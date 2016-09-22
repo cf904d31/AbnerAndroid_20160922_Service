@@ -17,8 +17,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
+
         receiver = new MyReceiver();
-        IntentFilter filter = new IntentFilter("bradmp3");
+        IntentFilter filter = new IntentFilter("AbnerMp3");
         registerReceiver(receiver,filter);
     }
 
@@ -40,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             int len = intent.getIntExtra("len",-1);
-            seekBar.setMax(len);
+            int now = intent.getIntExtra("now",-1);
+            if (len != -1) seekBar.setMax(len);
+            if (now != -1) seekBar.setProgress(now);
         }
     }
 }
