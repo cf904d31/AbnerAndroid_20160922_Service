@@ -54,9 +54,16 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //Log.d("Abner","onStartCommand");
-        mp.start();
+        int skip = intent.getIntExtra("skip",-1);
 
-        timer.schedule(new MyTask(),0, 500);
+        if (skip == -1) {
+            mp.start();
+            timer.schedule(new MyTask(),0, 500);
+        } else {
+            mp.seekTo(skip);
+        }
+
+
         return super.onStartCommand(intent, flags, startId);
 
 
@@ -66,7 +73,7 @@ public class MyService extends Service {
     public void onDestroy() {
         //Log.d("Abner","onDestroy");
 
-        super.onDestroy();
+
 
         if (mp != null) {
             if(mp.isPlaying()) {
@@ -80,5 +87,6 @@ public class MyService extends Service {
             timer.cancel();
             timer = null;
         }
+        super.onDestroy();
     }
 }
